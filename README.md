@@ -20,8 +20,8 @@
 まず、本リポジトリをローカル環境に取り込みます。
 
 ```bash
-git clone https://github.com/m2-sakai/weight-management-app.git
-cd weight-management-app
+git clone https://github.com/m2-sakai/weight-management-app-azure.git
+cd weight-management-app-azure
 ```
 
 その後、以下で依存ライブラリをインストールします。
