@@ -29,7 +29,7 @@ jobs:
           rm -rf ./.next/cache
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: zip release.zip ./* .next -qr
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -50,14 +50,14 @@ jobs:
         with:
           name: node-app
 
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
-
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'weight-management-app-azure'
           slot-name: 'Production'
-          package: .
+          package: release.zip
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8247DA420F444DF59FD46F90FB18BE4F }}
+
+      - name: Delete zip file
+        run: rm release.zip
