@@ -51,11 +51,12 @@ export default function Page() {
   useEffect(() => {
     const data = async (labelDateArray: string[]) => {
       const session: UserSession = await getSession();
-      const user: User = await getUser(session.email);
-      if (user === undefined) {
+      const user = await getUser(session.email);
+      if (user !== null) {
+        setGoal(Number(user.goal));
+      } else {
         redirect('/');
       }
-      setGoal(user.goal);
       const weightList = await fetchWeightsForGraph(session.email, dayRange);
       const graphList: GraphWeight[] = [];
       labelDateArray.forEach((labelDate, index) => {
@@ -67,7 +68,7 @@ export default function Page() {
           if (labelDate === compareDate) {
             graphList.push({
               date: labelDate,
-              weight: weight.weight,
+              weight: Number(weight.weight),
             });
           }
         });

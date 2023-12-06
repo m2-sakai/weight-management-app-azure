@@ -1,0 +1,29 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String    @default(cuid()) @id
+  name        String    @db.VarChar(255)
+  email       String    @unique
+  height      Decimal   @db.Decimal(4,1)
+  password    String
+  goal        Decimal   @db.Decimal(4,1)
+  @@map(name: "wm_users")
+}
+
+model Weight {
+  userId      String    @map(name: "user_id")
+  weight      Decimal   @db.Decimal(4,1)
+  date        DateTime  @db.Date
+  @@unique(fields: [userId, date])
+  @@map(name: "wm_weights")
+}

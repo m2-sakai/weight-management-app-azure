@@ -1,5 +1,7 @@
+import { Prisma } from '@prisma/client';
+
 export type Weight = {
   userId: string;
-  weight: number;
+  weight: Prisma.Decimal;
   date: string;
 };

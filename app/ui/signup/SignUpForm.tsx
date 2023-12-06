@@ -80,6 +80,7 @@ export default function SignInForm() {
                 id="height"
                 name="height"
                 type="number"
+                step="0.1"
                 placeholder="Enter your user height"
                 required
               />
@@ -96,6 +97,7 @@ export default function SignInForm() {
                 id="goal"
                 name="goal"
                 type="number"
+                step="0.1"
                 placeholder="Enter your user goal weights"
                 required
               />

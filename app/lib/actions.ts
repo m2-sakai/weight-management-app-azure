@@ -1,12 +1,12 @@
 'use server';
 
 import { auth, signIn, signOut } from '@/auth';
-import { sql } from '@vercel/postgres';
 import bcrypt from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import { z } from 'zod';
 import { UserSession } from '@/app/types/UserSession';
+import prisma from '@/app/lib/prisma';
 
 const CreateUser = z.object({
   name: z.string(),
@@ -67,11 +67,17 @@ export async function createAccount(prevState: string | undefined, formData: For
   const heightNum = Number(height);
   const goalNum = Number(goal);
   try {
-    await sql`
-		INSERT INTO wm_users (id, name, email, password, height, goal)
-		VALUES (${id}, ${name}, ${email}, ${hashedPassword}, ${heightNum}, ${goalNum})`;
+    await prisma.user.create({
+      data: {
+        id: id,
+        name: name,
+        email: email,
+        height: heightNum,
+        password: hashedPassword,
+        goal: goalNum,
+      },
+    });
   } catch (error) {
-    console.log(error);
     return 'FailedSignIn';
   }
 

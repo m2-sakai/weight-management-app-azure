@@ -53,6 +53,13 @@ export const InputModal = ({
             })}
             onClick={async () => {
               setIsOpenModal(false);
+              const compareDate = new Date(date);
+              const eventApi = calenderApi
+                .getEvents()
+                .filter((e) => e.start?.getDate() === compareDate.getDate());
+              if (eventApi.length !== 0) {
+                eventApi[0].remove();
+              }
               calenderApi.addEvent({
                 title: weight.toString() + ' kg',
                 start: date,

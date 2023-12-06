@@ -44,12 +44,13 @@ export default function Page() {
   useEffect(() => {
     const data = async () => {
       const session: UserSession = await getSession();
-      const user: User = await getUser(session.email);
-      if (user === undefined) {
+      const user = await getUser(session.email);
+      if (user !== null) {
+        setEmail(user.email);
+        setHeights(Number(user.height));
+      } else {
         redirect('/');
       }
-      setEmail(user.email);
-      setHeights(user.height);
 
       const currentDate: Date = new Date();
       const currentMonth: number = currentDate.getMonth() + 1;
@@ -66,7 +67,7 @@ export default function Page() {
 
         const compareDate = new Date(weight.date);
         if (compareDate.toDateString() === currentDate.toDateString()) {
-          setCurrentWeights(weight.weight);
+          setCurrentWeights(Number(weight.weight));
         }
       });
       setCurrentEvent(initialEventList);
