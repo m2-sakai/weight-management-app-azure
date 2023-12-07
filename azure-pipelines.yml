@@ -4,6 +4,7 @@ trigger:
 variables:
   azureSubscription: '68bec344-00b6-46d7-b511-13e1323144bb'
   webAppName: 'nextjs-default'
+  environmentName: 'Production'
   vmImageName: 'ubuntu-latest'
 
 stages:
@@ -45,6 +46,7 @@ stages:
     jobs:
       - deployment: Deploy
         displayName: Deploy
+        environment: $(environmentName)
         pool:
           vmImage: $(vmImageName)
         strategy:
