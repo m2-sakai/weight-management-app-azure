@@ -3,7 +3,7 @@ trigger:
 
 variables:
   azureSubscription: 'm2-sakai-service-connection'
-  webAppName: 'nextjs-default'
+  webAppName: 'weight-management-app-azure'
   environmentName: 'Production'
   vmImageName: 'ubuntu-latest'
 
