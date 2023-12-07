@@ -43,6 +43,7 @@ export async function authenticate(prevState: string | undefined, formData: Form
     if ((error as Error).message.includes('CredentialsSignin')) {
       return 'CredentialSignin';
     }
+    console.error(error);
     throw error;
   }
 }
@@ -78,6 +79,7 @@ export async function createAccount(prevState: string | undefined, formData: For
       },
     });
   } catch (error) {
+    console.error(error);
     return 'FailedSignIn';
   }
 
