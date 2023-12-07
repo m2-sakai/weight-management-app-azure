@@ -82,6 +82,5 @@ export async function createAccount(prevState: string | undefined, formData: For
     console.error(error);
     return 'FailedSignIn';
   }
-
-  redirect('/top');
+  await signIn('credentials', Object.fromEntries(formData));
 }
