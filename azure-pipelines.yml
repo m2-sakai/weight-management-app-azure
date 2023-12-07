@@ -54,7 +54,7 @@ stages:
             deploy:
               steps:
                 - task: AzureWebApp@1
-                  displayName: 'Azure Web App Deploy: sitename'
+                  displayName: 'Azure Web App Deploy: nextjs-default'
                   inputs:
                     azureSubscription: $(azureSubscription)
                     appType: webAppLinux
